@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+html,
+body,
+#root,
+.app {
+  display: flex;
+  position: relative;
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center; */
+}
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "robot", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

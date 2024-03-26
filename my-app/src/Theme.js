@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 import { Button, CssBaseline } from "@mui/material";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Theme = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -54,7 +54,7 @@ const Theme = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-<DarkModeIcon onClick={toggleTheme}/>
+      <DarkModeIcon onClick={toggleTheme} />
     </ThemeProvider>
   );
 };

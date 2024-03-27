@@ -7,9 +7,11 @@ body,
   position: relative;
 
 }
-.board{
+.form{
   height: 100vh;
   width: 100vw;
+  opacity: 1;
+
    background-image: url("https://media.licdn.com/dms/image/C4E1BAQG1X-Gki_rqUw/company-background_10000/0/1634305929178/bluecloud_ai_cover?e=2147483647&v=beta&t=QyCTh8_CdN73biOTOcvth12jNeQrzqPXAJfaX29xvAI");
 }
 .content {

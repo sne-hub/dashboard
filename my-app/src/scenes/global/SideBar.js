@@ -12,7 +12,6 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelected, toggleSideBar } from "../../redux/slice";
@@ -23,7 +22,7 @@ const Item = ({ title, to, icon }) => {
   return (
     <MenuItem
       active={selected === title}
-      style={{ color: "grey" }}
+      style={{ color: "#36454F" }}
       onClick={() => dispatch(setSelected(title))}
       icon={icon}
     >
@@ -44,7 +43,7 @@ const SideBar = () => {
         display: "flex",
         height: "100vh",
         ".pro-sidebar-inner": {
-          background: "#c0c0c0",
+          background: "white",
         },
         " .pro-icon-wrapper": { background: "transparent" },
         ".pro-inner-item": {
@@ -62,13 +61,7 @@ const SideBar = () => {
         <Menu>
           {!collapsed && (
             <Box>
-              <Box>
-                <IconButton onClick={() => dispatch(toggleSideBar())}>
-                  <CloseOutlinedIcon
-                    sx={{ color: "e6e6e6" }}
-                  ></CloseOutlinedIcon>
-                </IconButton>
-              </Box>
+        
               <Box
                 display="flex"
                 justifyContent="center"
@@ -84,7 +77,7 @@ const SideBar = () => {
                 />
               </Box>
               <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h4" fontWeight="bold" color="e6e6e6">
+                <Typography variant="h4" fontWeight="bold" color="#000435">
                   Sinenhlanhla
                 </Typography>
                 <Typography variant="h6" color="green">
@@ -94,6 +87,7 @@ const SideBar = () => {
             </Box>
           )}
           <Box paddingLeft={collapsed ? undefined : "10%"}>
+            <Typography color="#000435" variant="h6" fontWeight="bold" >Data</Typography>
             <Item
               title="Team"
               icon={<PeopleOutlinedIcon />}
@@ -118,6 +112,7 @@ const SideBar = () => {
               to="/calender"
               selected={selected}
             />{" "}
+            <Typography color="#000435" variant="h6" fontWeight="bold">Charts</Typography>
             <Item
               title="Bar-chart"
               icon={<BarChartOutlinedIcon />}
@@ -131,23 +126,25 @@ const SideBar = () => {
               selected={selected}
             />{" "}
             <Item
-              title="Invoices"
-              icon={<ReceiptOutlinedIcon />}
-              to="/invoices"
-              selected={selected}
-            />{" "}
-            <Item
               title="Line-chart"
               icon={<TimelineOutlinedIcon />}
               to="/line-chart"
               selected={selected}
             />{" "}
-            <Item
+              <Item
               title="Geography-chart"
               icon={<MapOutlinedIcon />}
               to="/geography-chart"
               selected={selected}
             />{" "}
+            <Typography color="#000435" variant="h6" fontWeight="bold">Invoices</Typography>
+            <Item
+              title="Invoices"
+              icon={<ReceiptOutlinedIcon />}
+              to="/invoices"
+              selected={selected}
+            />{" "}
+          <Typography color="#000435" variant="h6" fontWeight="bold">About</Typography>
             <Item
               title="Dashboard"
               icon={<HomeOutlinedIcon />}

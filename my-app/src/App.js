@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 // import DashBoard from "./scenes/dashBoard/";
 import SideBar from "./scenes/global/SideBar";
 import { useSelector } from "react-redux";
+import { Form } from "./components/Form";
 // import pie from "./scenes/pie";
 // import bar from "./scenes/bar";
 // import line from "./scenes/line";
@@ -16,13 +17,18 @@ import { useSelector } from "react-redux";
 
 function App() {
   const showSideBar = useSelector((state) => state.showSideBar);
+  const formOpen = useSelector((state) => state.formOpen);
+
   return (
     <div>
       <div className="app">
-        {showSideBar && <SideBar />}
-
-        <main className="content">
+        {formOpen && 
+          <Form />
+          }
+       {!formOpen&& <main className="content">
           <TopBar />
+           <SideBar />
+
           {/* <div className="board">
           </div> */}
           {/* <Routes> */}
@@ -38,7 +44,7 @@ function App() {
             <Route path="/geography" element={<geography />}></Route>
             <Route path="/calender" element={<calender />}></Route> */}
           {/* </Routes> */}
-        </main>
+        </main>}
       </div>
     </div>
   );

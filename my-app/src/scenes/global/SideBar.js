@@ -15,10 +15,12 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelected, toggleSideBar } from "../../redux/slice";
+import store from "../../redux/store";
 
 const Item = ({ title, to, icon }) => {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.selected);
+
   return (
     <MenuItem
       active={selected === title}
@@ -35,8 +37,8 @@ const Item = ({ title, to, icon }) => {
 const SideBar = () => {
   const selected = useSelector((state) => state.selected);
   const collapsed = useSelector((state) => state.collapsed);
-  const dispatch = useDispatch();
-
+  const logged = useSelector((state) => state.logged);
+  const role = useSelector((state) => state.role);
   return (
     <Box
       sx={{
@@ -61,7 +63,6 @@ const SideBar = () => {
         <Menu>
           {!collapsed && (
             <Box>
-        
               <Box
                 display="flex"
                 justifyContent="center"
@@ -77,17 +78,19 @@ const SideBar = () => {
                 />
               </Box>
               <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h4" fontWeight="bold" color="#000435">
-                  Sinenhlanhla
+                <Typography variant="h6" fontWeight="bold" color="#000435">
+                  {logged}
                 </Typography>
                 <Typography variant="h6" color="green">
-                  web
+                  {role}
                 </Typography>
               </Box>
             </Box>
           )}
           <Box paddingLeft={collapsed ? undefined : "10%"}>
-            <Typography color="#000435" variant="h6" fontWeight="bold" >Data</Typography>
+            <Typography color="#000435" variant="h6" fontWeight="bold">
+              Data
+            </Typography>
             <Item
               title="Team"
               icon={<PeopleOutlinedIcon />}
@@ -112,7 +115,9 @@ const SideBar = () => {
               to="/calender"
               selected={selected}
             />{" "}
-            <Typography color="#000435" variant="h6" fontWeight="bold">Charts</Typography>
+            <Typography color="#000435" variant="h6" fontWeight="bold">
+              Charts
+            </Typography>
             <Item
               title="Bar-chart"
               icon={<BarChartOutlinedIcon />}
@@ -131,20 +136,24 @@ const SideBar = () => {
               to="/line-chart"
               selected={selected}
             />{" "}
-              <Item
+            <Item
               title="Geography-chart"
               icon={<MapOutlinedIcon />}
               to="/geography-chart"
               selected={selected}
             />{" "}
-            <Typography color="#000435" variant="h6" fontWeight="bold">Invoices</Typography>
+            <Typography color="#000435" variant="h6" fontWeight="bold">
+              Invoices
+            </Typography>
             <Item
               title="Invoices"
               icon={<ReceiptOutlinedIcon />}
               to="/invoices"
               selected={selected}
             />{" "}
-          <Typography color="#000435" variant="h6" fontWeight="bold">About</Typography>
+            <Typography color="#000435" variant="h6" fontWeight="bold">
+              About
+            </Typography>
             <Item
               title="Dashboard"
               icon={<HomeOutlinedIcon />}

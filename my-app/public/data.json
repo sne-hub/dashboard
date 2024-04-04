@@ -1,0 +1,51 @@
+[
+    {
+      "name": "John Doe",
+      "email": "johndoe@gmail.com",
+      "image": "https://static.vecteezy.com/system/resources/previews/004/476/164/original/young-man-avatar-character-icon-free-vector.jpg",
+      "companyName": "Amazon",
+      "companyUrl": "http://surl.li/oebmx",
+      "githubUserName": "technext/JohnDoe",
+      "gitHubLink": "https://github.com/technext/JohnDoe",
+      "status": "Believe in yourself!"
+    },
+    {
+      "name": "Kate Jackson",
+      "email": "kate@gmail.com",
+      "image": "https://previews.123rf.com/images/elvie15veronika/elvie15veronika2005/elvie15veronika200500047/147252381-social-media-avatar-profile-a-woman-african-woman-in-glasses-office-worker-vector-trendy-minimal.jpg",
+      "companyName": "Amazon",
+      "companyUrl": "http://surl.li/oebmx",
+      "twitterHandle": "https://twitter.com/KateJac79472707",
+      "status": "Never let it rest!"
+    },
+    {
+      "name": "Jane Doe",
+      "email": "janedoe@yahoo.com",
+      "image": "https://img.freepik.com/premium-vector/avatar-icon-girl-woman-flat-style-white-vector-illustration_116137-1938.jpg?w=2000",
+      "companyName": "IBM",
+      "companyUrl": "https://www.ibm.com/us-en",
+      "githubUserName": "konki-vienna/jane_doe",
+      "gitHubLink": "https://github.com/konki-vienna/jane_doe",
+      "twitterHandle": "janedoe966",
+      "status": "Believe you can and you're halfway there."
+    },
+    {
+      "name": "Jason Zulu",
+      "email": "jason.zulu@gmail.com",
+      "image": "https://static.vecteezy.com/system/resources/previews/002/002/332/original/ablack-man-avatar-character-isolated-icon-free-vector.jpg",
+      "companyName": "IBM",
+      "companyUrl": "https://www.ibm.com/us-en",
+      "githubUserName": "iambossmao/JasonZ",
+      "gitHubLink": "https://github.com/iambossmao/JasonZ",
+      "status": "All dreams are within reach."
+    },
+    {
+      "name": "Wendy Moloi",
+      "email": "wendymoloi@gmail.com",
+      "image": "https://static.vecteezy.com/system/resources/previews/002/002/247/original/beautiful-black-woman-avatar-character-icon-free-vector.jpg",
+      "companyName": "Accenture",
+      "companyUrl": "https://www.accenture.com/gb-en",
+      "twitterHandle": "WendyMoloi4",
+      "status": "Do one thing every day that scares you."
+    }
+  ]

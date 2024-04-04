@@ -8,9 +8,16 @@ const initialState = {
   password: "",
   user: {},
   users: [],
+  isLoading:false,
+
   errorMessage: "",
   registerOpen: false,
   forgotPassword: false,
+  name: "",
+  surname: "",
+  signedIn: false,
+  logged: "",
+  role: "",
 };
 const dashboardReducer = createSlice({
   name: "dashboard",
@@ -26,8 +33,8 @@ const dashboardReducer = createSlice({
     setSelected: (state, action) => {
       state.selected = action.payload;
     },
-    toggleOpenForm: (state) => {
-      state.formOpen = !state.formOpen;
+    toggleOpenForm: (state, action) => {
+      state.formOpen = state.errorMessage ? state.formOpen : action.payload;
     },
     setUserName: (state, action) => {
       state.userName = action.payload;
@@ -38,23 +45,47 @@ const dashboardReducer = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setUsers: (state, action) => {
+      state.users = action.payload;
+    },
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
+    setSurname: (state, action) => {
+      state.surname = action.payload;
+    },
     addToUsers: (state) => {
       state.users.push(state.user);
     },
     setErrorMessage: (state, action) => {
       state.errorMessage = action.payload;
     },
-    openRegister: (state) => {
-      state.registerOpen = !state.registerOpen;
+    openRegister: (state, action) => {
+      state.registerOpen = action.payload;
     },
-    updatePassword: (state) => {
-      console.log("dispatched");
-      state.forgotPassword = !state.forgotPassword;
+    updatePassword: (state, action) => {
+      state.forgotPassword = action.payload;
     },
+    signIn: (state, action) => {
+      state.signedIn = action.payload;
+    },
+    setLogged: (state, action) => {
+      state.logged = action.payload;
+    },
+    setRole: (state, action) => {
+      state.role = action.payload;
+    },
+    setIsLoading:(state,action)=>{
+      state.isLoading= action.payload
+    }
   },
 });
+
 export const {
   toggleSideBar,
+  setLogged,
+  setRole,
+  setIsLoading,
   setIsCollapsed,
   openRegister,
   setSelected,
@@ -65,5 +96,9 @@ export const {
   setErrorMessage,
   updatePassword,
   addToUsers,
+  setName,
+  setUsers,
+  signIn,
+  setSurname,
 } = dashboardReducer.actions;
 export default dashboardReducer.reducer;

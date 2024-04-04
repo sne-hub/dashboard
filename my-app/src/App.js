@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import SideBar from "./scenes/global/SideBar";
 import { useSelector } from "react-redux";
 import { Form } from "./components/Form";
+import Users from "./components/Users";
 // import pie from "./scenes/pie";
 // import bar from "./scenes/bar";
 // import line from "./scenes/line";
@@ -28,6 +29,7 @@ function App() {
        {!formOpen&& <main className="content">
           <TopBar />
            <SideBar />
+           {/* <Users /> */}
 
           {/* <div className="board">
           </div> */}

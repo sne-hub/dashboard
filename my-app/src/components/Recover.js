@@ -1,55 +1,41 @@
 import { Button, FormControl, TextField, Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToUsers,
   openRegister,
   setErrorMessage,
-  setLogged,
   setName,
   setPassword,
   setRole,
   setSurname,
   setUser,
   setUserName,
-  signIn,
   toggleOpenForm,
+  updatePassword,
 } from "../redux/slice";
-import checkRegister from "../utils/checkRegister";
 import store from "../redux/store";
+import checkRecover from "../utils/checkRecover";
 
-export const Register = () => {
+export const Recover = ({otp}) => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.userName);
   const password = useSelector((state) => state.password);
+  const [newPassword, setNewPassword] = useState("");
+  const [otpNumber, setOtpNumber] = useState("")
+
   const users = useSelector((state) => state.users);
   const errorMessage = useSelector((state) => state.errorMessage);
-  const name = useSelector((state) => state.name);
-  const surname = useSelector((state) => state.surname);
-  const role = useSelector((state) => state.role);
+const handleOtp = (e)=>{
+  e.preventDefault()
+  setOtpNumber(e.target.value)
+}
+  const user = useSelector((state) => state.user);
 
   const handleUserName = (e) => {
     e.preventDefault();
     dispatch(setErrorMessage(""));
     dispatch(setUserName(e.target.value));
-  };
-
-  const handleRole = (e) => {
-    e.preventDefault();
-    dispatch(setErrorMessage(""));
-    dispatch(setRole(e.target.value));
-  };
-
-  const handleName = (e) => {
-    e.preventDefault();
-    dispatch(setErrorMessage(""));
-    dispatch(setName(e.target.value));
-  };
-
-  const handleSurname = (e) => {
-    e.preventDefault();
-    dispatch(setErrorMessage(""));
-    dispatch(setSurname(e.target.value));
   };
 
   const handlePassword = (e) => {
@@ -58,23 +44,31 @@ export const Register = () => {
     dispatch(setPassword(e.target.value));
   };
 
+  const confirmPassword = (e) => {
+    e.preventDefault();
+    dispatch(setErrorMessage(""));
+    setNewPassword(e.target.value);
+  };
+
   const saveUser = (e) => {
     e.preventDefault();
-    checkRegister(users, userName, password, name, surname);
-    dispatch(setRole(role));
-
-    dispatch(setUser({ name, surname, userName, password, role }));
-    dispatch(setLogged(`${name} ${surname}`));
+    checkRecover(users, userName, newPassword, password, otp, otpNumber);
+   
+    dispatch(setRole(user.role));
     dispatch(addToUsers());
     dispatch(setUserName(""));
     dispatch(setPassword(""));
     dispatch(setName(""));
     dispatch(setSurname(""));
     dispatch(setUser({}));
+
     if (!store.getState().errorMessage) {
       dispatch(openRegister(false));
       dispatch(toggleOpenForm(false));
-      dispatch(signIn(true));
+      //   dispatch(signIn(true));
+      dispatch(toggleOpenForm(false));
+      dispatch(openRegister(false));
+      dispatch(updatePassword(false));
     }
   };
 
@@ -105,23 +99,6 @@ export const Register = () => {
 
         <FormControl sx={{ width: "90%", p: 2 }}>
           <TextField
-            label="enter first name"
-            value={name}
-            onChange={handleName}
-          ></TextField>{" "}
-          <TextField
-            label="enter surname name"
-            value={surname}
-            sx={{ marginTop: 2, marginBottom: 2 }}
-            onChange={handleSurname}
-          ></TextField>
-          <TextField
-            label="enter your occupation"
-            value={role}
-            sx={{ marginTop: 2, marginBottom: 2 }}
-            onChange={handleRole}
-          ></TextField>
-          <TextField
             label="enter user name"
             value={userName}
             onChange={handleUserName}
@@ -132,6 +109,17 @@ export const Register = () => {
             value={password}
             onChange={handlePassword}
           ></TextField>
+          <TextField
+            label="confirm password"
+            sx={{ marginTop: 2, marginBottom: 2 }}
+            value={newPassword}
+            onChange={confirmPassword}
+          ></TextField>
+              <TextField
+            label="enter otp number"
+            value={otpNumber}
+            onChange={handleOtp}
+          ></TextField>
           {errorMessage && (
             <Typography color="red" fontStyle="italic">
               {errorMessage}
@@ -140,7 +128,7 @@ export const Register = () => {
         </FormControl>
         <Box display="flex" justifyItems="center" p={2}>
           <Button variant="contained" onClick={saveUser}>
-            sign up
+            recover
           </Button>
           <Box
             style={{ borderBottom: "1px solid #e0e0e0", margin: "10px 0" }}

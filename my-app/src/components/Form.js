@@ -4,23 +4,24 @@ import {
   TextField,
   Box,
   Typography,
-  D,
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addToUsers,
+  openRegister,
   setErrorMessage,
   setPassword,
-  setUser,
   setUserName,
+  signIn,
   toggleOpenForm,
   updatePassword,
 } from "../redux/slice";
-import checkLogIn from "../utils/checkDetails";
-import checkRegister from "../utils/checkRegister";
+
 import checkMatch from "../utils/checkMatch";
 import ForgotPassword from "./ForgotPassword";
+import store from "../redux/store";
+import { Register } from "./Register";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -29,16 +30,20 @@ export const Form = () => {
   const users = useSelector((state) => state.users);
   const errorMessage = useSelector((state) => state.errorMessage);
   const forgotPassword = useSelector((state) => state.forgotPassword);
+  const registerOpen = useSelector((state) => state.registerOpen);
 
   const handleUserName = (e) => {
     e.preventDefault();
     dispatch(setErrorMessage(""));
     dispatch(setUserName(e.target.value));
   };
-const handleForgotPassword =()=>{
-  console.log("here");
-  dispatch(updatePassword())
-}
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+
+    dispatch(updatePassword(true));
+  };
+
   const handlePassword = (e) => {
     e.preventDefault();
     dispatch(setErrorMessage(""));
@@ -47,25 +52,26 @@ const handleForgotPassword =()=>{
 
   const saveUser = (e) => {
     e.preventDefault();
-    checkRegister(users, userName);
-    dispatch(setUser({ userName, password }));
-    dispatch(addToUsers());
-    dispatch(setUserName(""));
-    dispatch(setPassword(""));
-    dispatch(setUser({}));
-    // if (!errorMessage) dispatch(toggleOpenForm());
+    dispatch(setErrorMessage(""));
+    dispatch(openRegister(true));
   };
 
   const logIn = (e) => {
     e.preventDefault();
     checkMatch(users, userName, password);
-    checkLogIn(users, userName);
-    dispatch(setUser({ userName, password }));
-    dispatch(addToUsers());
-    dispatch(setUserName(""));
-    dispatch(setPassword(""));
-    dispatch(setUser({}));
-    // if (!errorMessage) dispatch(toggleOpenForm());
+    if (!store.getState().errorMessage) {
+      dispatch(setUserName(""));
+      dispatch(setPassword(""));
+      dispatch(signIn(true));
+      dispatch(toggleOpenForm(false));
+    }
+  };
+
+  const closeForms = (e) => {
+    e.preventDefault();
+    dispatch(toggleOpenForm(false));
+    dispatch(openRegister(false));
+    dispatch(updatePassword(false));
   };
 
   return (
@@ -75,21 +81,21 @@ const handleForgotPassword =()=>{
       justifyContent="center"
       justifySelf="center"
       alignItems="center"
-      margin="25%"
+      marginTop="10%"
       boxShadow={2}
-
+      width="45vw"
     >
-      <Typography
-        variant="h2"
-        fontWeight="bold"
-        color="#008080
-"
-      >
+      <Box display="flex" padding={1} marginLeft="93%">
+        <CloseOutlined onClick={closeForms} sx={{ cursor: "pointer" }} />
+      </Box>
+      <Typography variant="h2" fontWeight="bold" color="#008080">
         BlueCloudai
       </Typography>
-      {forgotPassword && <ForgotPassword />}
 
-      {!forgotPassword && (
+      {forgotPassword && <ForgotPassword />}
+      {registerOpen && !forgotPassword && <Register />}
+
+      {!forgotPassword && !registerOpen && (
         <Box
           display="flex"
           flexDirection="column"
@@ -124,7 +130,12 @@ const handleForgotPassword =()=>{
               </Typography>
             )}
 
-            <Button variant="button" color="blue" sx={{ cursor: "pointer" }} onClick={handleForgotPassword} >
+            <Button
+              variant="button"
+              color="blue"
+              sx={{ cursor: "pointer" }}
+              onClick={handleForgotPassword}
+            >
               Forgot password?
             </Button>
             <Button

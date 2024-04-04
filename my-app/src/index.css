@@ -5,6 +5,10 @@ body,
 .app {
   display: flex;
   position: relative;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
 
 }
 .form{

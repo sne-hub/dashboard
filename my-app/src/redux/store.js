@@ -1,7 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { thunk } from "redux-thunk";
 import dashboardReducer from "./slice";
 
 const store = configureStore({
-    reducer: dashboardReducer
-})
-export default store
+  reducer: dashboardReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(thunk),
+});
+export default store;
